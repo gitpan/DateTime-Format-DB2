@@ -4,7 +4,7 @@ use strict;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use DateTime;
 use DateTime::Format::Builder
@@ -54,11 +54,11 @@ sub format_time
     return $dt->hms(':');
 }
 
-sub format_datetime
+sub format_timestamp
 {
     my ( $self, $dt ) = @_;
 
-    return $self->format_date($dt) . '-' . $self->format_time($dt);
+    return $self->format_date($dt) . '-' . $dt->hms('.');
 }
 
 
@@ -112,7 +112,7 @@ If given an improperly formatted string, this method may die.
 
 =item * format_time($datetime)
 
-=item * format_datetime($datetime)
+=item * format_timestamp($datetime)
 
 Given a C<DateTime> object, this methods returns an appropriately
 formatted string.

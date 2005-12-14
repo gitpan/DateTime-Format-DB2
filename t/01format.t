@@ -17,6 +17,6 @@ my $dt = DateTime->new( year   => 2000,
 
 {
     is( $mysql->format_date($dt), '2000-05-06', 'format_date' );
-    is( $mysql->format_datetime($dt), '2000-05-06-15:23:44', 'format_datetime' );
+    is( $mysql->format_timestamp($dt), '2000-05-06-15.23.44', 'format_datetime' );
     is( $mysql->format_time($dt), '15:23:44', 'format_time' );
 }
