@@ -4,7 +4,7 @@ use strict;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use DateTime;
 use DateTime::Format::Builder
@@ -74,10 +74,10 @@ DateTime::Format::DB2 - Parse and format DB2 dates and times
 
   use DateTime::Format::DB2;
 
-  my $dt = DateTime::Format::DB2->parse_datetime( '2003-01-16-23:12:01' );
+  my $dt = DateTime::Format::DB2->parse_timestamp( '2003-01-16-23.12.01.300000' );
 
-  # 2003-01-16-23:12:01
-  DateTime::Format::DB2->format_datetime($dt);
+  # 2003-01-16-23.12.01.300000
+  DateTime::Format::DB2->format_timestamp($dt);
 
 =head1 DESCRIPTION
 
