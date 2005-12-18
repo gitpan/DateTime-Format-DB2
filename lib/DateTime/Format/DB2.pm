@@ -4,7 +4,7 @@ use strict;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use DateTime;
 use DateTime::Format::Builder
@@ -20,10 +20,15 @@ use DateTime::Format::Builder
           regex  => qr!^(\d\d):(\d\d):(\d\d)$!,
           extra  => { time_zone => 'floating' },
         },
-# 2005-12-13-12.19.07false.276270
+# 2005-12-13-12.19.07.276270
         parse_timestamp =>
         [ { params => [ qw( year month day hour minute second nanosecond) ],
             regex  => qr/^(\d\d\d\d)-(\d\d)-(\d\d)-(\d\d)\.(\d\d)\.(\d\d)(\.\d+)?$/,
+            extra  => { time_zone => 'floating' },
+            postprocess => \&_fix_nano
+          },
+        { params => [ qw( year month day hour minute second nanosecond) ],
+            regex  => qr/^(\d\d\d\d)-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d)(\.\d+)?$/,
             extra  => { time_zone => 'floating' },
             postprocess => \&_fix_nano
           },

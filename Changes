@@ -1,0 +1,6 @@
+
+2005-12-18:
+0.04 - Added parsing of YYYY-MM-DD HH:MM:SS.NNNNNN since thats what DBI
+actually gives us. (odd that)
+
+0.03 - Fixed SYNOPSIS.
