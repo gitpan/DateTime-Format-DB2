@@ -4,7 +4,7 @@ use strict;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use DateTime;
 use DateTime::Format::Builder
@@ -22,6 +22,18 @@ use DateTime::Format::Builder
         },
 # 2005-12-13-12.19.07.276270
         parse_timestamp =>
+        [ { params => [ qw( year month day hour minute second nanosecond) ],
+            regex  => qr/^(\d\d\d\d)-(\d\d)-(\d\d)-(\d\d)\.(\d\d)\.(\d\d)(\.\d+)?$/,
+            extra  => { time_zone => 'floating' },
+            postprocess => \&_fix_nano
+          },
+        { params => [ qw( year month day hour minute second nanosecond) ],
+            regex  => qr/^(\d\d\d\d)-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d)(\.\d+)?$/,
+            extra  => { time_zone => 'floating' },
+            postprocess => \&_fix_nano
+          },
+        ],
+        parse_datetime =>
         [ { params => [ qw( year month day hour minute second nanosecond) ],
             regex  => qr/^(\d\d\d\d)-(\d\d)-(\d\d)-(\d\d)\.(\d\d)\.(\d\d)(\.\d+)?$/,
             extra  => { time_zone => 'floating' },
@@ -66,6 +78,7 @@ sub format_timestamp
     return $self->format_date($dt) . '-' . $dt->hms('.');
 }
 
+*format_datetime = *format_timestamp;
 
 1;
 
